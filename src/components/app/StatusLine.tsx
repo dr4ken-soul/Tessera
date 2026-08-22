@@ -1,0 +1,2 @@
+/** Keep the current wallet or pool state visible during a silent demo. */
+export function StatusLine({ children, tone = 'default' }: { children: string; tone?: 'default' | 'error' | 'success' }): JSX.Element { const toneClass = tone === 'error' ? 'text-[var(--error)]' : tone === 'success' ? 'text-[var(--success)]' : 'text-[var(--text-muted)]'; return <p className={`font-mono text-[11px] uppercase tracking-[0.12em] ${toneClass}`}>{children}</p> }

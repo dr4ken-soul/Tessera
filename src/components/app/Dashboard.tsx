@@ -1,0 +1,16 @@
+import { ArrowRight, EyeOff, FileCheck2, WalletCards } from 'lucide-react'
+import { useLoans } from '../../hooks/useLoans'
+import { useWallet } from '../../hooks/useWallet'
+import { navigate } from '../../lib/navigation'
+import { FadeIn } from '../ui/FadeIn'
+import { StatusLine } from './StatusLine'
+
+/** Render the user's private position and the next product actions. */
+export function Dashboard(): JSX.Element {
+  const { address } = useWallet()
+  const { loans, proof, status } = useLoans()
+  const activeLoans = loans.filter((loan) => loan.status === 'active').length
+  return <div><FadeIn><StatusLine>step 02 · private position</StatusLine><div className="mt-5 flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><h1 className="font-serif text-[clamp(2rem,4vw,3.25rem)] leading-[1.08]">Your private position.</h1><p className="mt-4 max-w-lg text-base leading-[1.6] text-[var(--text-secondary)]">The pool keeps notes and transfers private. Tessera keeps the answer you choose to share clear.</p></div><div className="flex gap-3"><button className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-[var(--bg-primary)] transition-colors hover:bg-[var(--accent-hover)]" onClick={() => navigate('/app/lend')}>Create a loan</button><button className="rounded-full border border-[var(--border-default)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--accent-dim)]" onClick={() => navigate('/app/proof')}>Ask for a proof</button></div></div></FadeIn><div className="mt-14 grid gap-5 md:grid-cols-3"><MetricCard icon={<WalletCards size={18} />} label="private balance" value="not disclosed" detail="notes in this channel" /><MetricCard icon={<EyeOff size={18} />} label="active loans" value={String(activeLoans)} detail={loans.length ? 'schedule is private' : 'no agreements recorded'} /><MetricCard icon={<FileCheck2 size={18} />} label="credit proof" value={proof?.answer ? 'provable' : 'not requested'} detail={proof ? 'statement verified' : 'ask one question'} /></div><div className="mt-8 ledger-frame rounded-2xl p-6"><StatusLine>{status}</StatusLine><div className="mt-5 grid gap-4 text-sm md:grid-cols-3"><div><span className="font-mono text-xs text-[var(--text-muted)]">wallet</span><p className="mt-2 truncate text-[var(--text-secondary)]">{address ?? 'not connected'}</p></div><div><span className="font-mono text-xs text-[var(--text-muted)]">viewing key</span><p className="mt-2 text-[var(--success)]">held by wallet</p></div><div><span className="font-mono text-xs text-[var(--text-muted)]">pool</span><p className="mt-2 flex items-center gap-2 text-[var(--text-secondary)]">STRK20 mainnet <ArrowRight size={14} className="text-[var(--accent)]" /></p></div></div></div></div>
+}
+
+function MetricCard({ icon, label, value, detail }: { icon: JSX.Element; label: string; value: string; detail: string }): JSX.Element { return <article className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6"><div className="flex items-center justify-between text-[var(--accent)]">{icon}<span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">{label}</span></div><p className="mt-12 font-serif text-2xl">{value}</p><p className="mt-2 font-mono text-xs text-[var(--text-muted)]">{detail}</p></article> }

@@ -1,0 +1,9 @@
+[package]
+name = "tessera_contracts"
+version = "1.0.0"
+
+[dependencies]
+starknet = "2.12.0"
+
+[lib]
+path = "src/lib.cairo"

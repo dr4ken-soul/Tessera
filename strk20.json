@@ -1,0 +1,26 @@
+{
+  "name": "Tessera",
+  "network": "starknet-mainnet",
+  "repository": "https://github.com/dr4ken-soul/Tessera",
+  "demo": {
+    "path": null,
+    "status": "pending-screen-recording",
+    "notes": "Record the silent browser flow described in BUILD_GUIDE.md after connecting a privacy-enabled wallet."
+  },
+  "contracts": {
+    "loanCoordinator": null,
+    "anonymizer": null,
+    "privacyPool": null,
+    "status": "pending-mainnet-deployment"
+  },
+  "transactions": {
+    "shieldPrincipal": null,
+    "settleRepayment": null,
+    "selectiveCreditProof": null,
+    "status": "pending-wallet-signature"
+  },
+  "privacy": {
+    "viewingKey": "wallet-managed",
+    "notes": "browser never receives or stores the viewing key"
+  }
+}
