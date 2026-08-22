@@ -32,6 +32,8 @@ npm run preview
 
 Copy `.env.example` to `.env` and provide the deployed Tessera contract addresses and the STRK20 prover and discovery endpoints. Connect a privacy-enabled Starknet wallet. The first private action registers the viewing key and opens the required pool channel through the wallet or SDK implementation.
 
+Never put a private key in a `VITE_` environment variable. Vite exposes every `VITE_` variable to the browser bundle. Deployment signing must use a separate local-only deployer configuration or a wallet approval flow.
+
 The app intentionally fails with a visible status line if no compatible wallet or transaction hash is available. It does not simulate a mainnet transaction or store a viewing key in browser storage.
 
 ## Cairo contracts
